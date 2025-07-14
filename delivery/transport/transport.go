@@ -9,9 +9,10 @@ import (
 	"target-engine/delivery/model"
 
 	httptransport "github.com/go-kit/kit/transport/http"
+	"go.uber.org/zap"
 )
 
-func NewHTTPHandler(eps endpoint.Endpoints, logger *log.Logger) http.Handler {
+func NewHTTPHandler(eps endpoint.Endpoints, logger *zap.Logger) http.Handler {
 	r := http.NewServeMux()
 
 	r.Handle("/delivery", httptransport.NewServer(
