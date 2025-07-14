@@ -6,19 +6,19 @@ import (
 )
 
 func MatchCampaign(req model.DeliveryRequest, campaign model.Campaign) bool {
-	if !campaign.Active {
+	if campaign.Status != "ACTIVE" {
 		return false
 	}
 
-	if !matchRule(req.App, campaign.TargetRules.IncludeApps, campaign.TargetRules.ExcludeApps) {
+	if !matchRule(req.App, campaign.AppInclusion, campaign.AppExclusion) {
 		return false
 	}
 
-	if !matchRule(req.Country, campaign.TargetRules.IncludeCountries, campaign.TargetRules.ExcludeCountries) {
+	if !matchRule(req.Country, campaign.CountryInclusion, campaign.CountryExclusion) {
 		return false
 	}
 
-	if !matchRule(req.Os, campaign.TargetRules.IncludeOs, campaign.TargetRules.ExcludeOs) {
+	if !matchRule(req.OS, campaign.OSInclusion, campaign.OSExclusion) {
 		return false
 	}
 
